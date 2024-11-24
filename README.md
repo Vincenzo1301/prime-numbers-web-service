@@ -49,7 +49,7 @@ Using the REST API, implement a small **prime numbers web service**.
 
   Example commands:
   ```bash
-  java -Dserver.port=8080 -Dcluster.servers=http://localhost:8081,http://localhost:8082 -jar my-app.jar
-  java -Dserver.port=8081 -Dcluster.servers=http://localhost:8080,http://localhost:8082 -jar my-app.jar
-  java -Dserver.port=8082 -Dcluster.servers=http://localhost:8080,http://localhost:8081 -jar my-app.jar
+  java -Dserver.port=8080 -Dcluster.servers=http://localhost:8081,http://localhost:8082 -jar server.jar
+  java -Dserver.port=8081 -Dcluster.servers=http://localhost:8080,http://localhost:8082 -jar server.jar
+  java -Dserver.port=8082 -Dcluster.servers=http://localhost:8080,http://localhost:8081 -jar server.jar
   ```
