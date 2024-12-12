@@ -1,55 +1,56 @@
-# Assignment Content
+# Prime Numbers Web Service
 
-## Question
+## Overview
 
-Using the REST API, implement a small **prime numbers web service**.
+This project is a RESTful web service designed to manage prime number data efficiently. The service enables clients to check if a number is prime and stores the results for future use. It is built to demonstrate foundational concepts in web services, concurrency, and RESTful API design.
 
-### Requirements:
+## Features
 
-- The server maintains a **database of prime and non-prime numbers**.
-    - The "database" can be implemented in any way you choose (e.g., a simple text file or a RAM-stored list).
-- **Client Requests**:
-    - Clients send requests with a number to check if it is registered as **prime** or **non-prime**.
-    - If the number is not registered, the client:
-        1. Calculates whether the number is prime.
-        2. Sends a request to the server to store the result in the server's records.
+- **Prime Number Validation**: 
+  - The service checks whether a number is prime.
+  - If the number is not registered, the client calculates its primality and submits the result to the server for storage.
+- **Database Management**:
+  - The service maintains a simple database of prime and non-prime numbers.
+  - Flexible implementation: the database can be RAM-based, file-based, or other formats.
+- **RESTful API**:
+  - `GET`: Retrieve prime or non-prime status for a number.
+  - `PUT`/`POST`: Submit new number records to the server.
 
-### Implementation Notes:
+## Advanced Features (Optional)
 
-- Use any algorithm or API for prime number checking, including the **naive algorithm** shown during the lecture on Java
-  concurrency.
-- You can use:
-    - **Jersey library for Java**.
-    - Any other REST API technology (e.g., Python, Node.js, etc.).
-        - For Python, check the link provided in the *Practicalities* section.
-        - For Java, a tutorial link is provided in the *Practicalities* section on Blackboard.
-- **Correct REST API operations**:
-    - Use `GET` for retrieving numbers.
-    - Use `PUT` or `POST` for submitting numbers.
+- **Cluster Setup**:
+  - Support for multiple server instances operating in a synchronized cluster.
+  - Two synchronization modes:
+    - **On-demand**: Servers consult each other during queries.
+    - **Periodic**: Servers synchronize their records at intervals.
+  - Example cluster simulation with servers running on different ports.
 
 ---
 
-## Optional (Advanced) Task
+## Technology Stack
 
-### Cluster Setup:
+- **Language**: Java, Python, or Node.js
+- **REST Framework**: Jersey (Java) or equivalent alternatives.
+- **Database**: In-memory storage or file-based persistence.
 
-- Assume multiple servers, with each server:
-    - Aware of the others' addresses.
-    - Able to consult the others before responding to queries.
-    - Alternatively, periodically synchronizing their databases to maintain up-to-date records.
+---
 
-### Implementation Details:
+## Setup and Usage
 
-- You can choose between:
-    1. **On-demand synchronization**: Servers consult each other with each query.
-    2. **Periodic synchronization**: Servers periodically share updates to keep records fresh.
+### Prerequisites
 
-- **Cluster Simulation**:
-    - Run multiple instances of the server on different ports on the same machine.
+- Java Development Kit (JDK)
+- Maven (for Java-based implementation)
+- Python (if using a Python-based framework)
+- Docker (optional for deployment)
 
-  Example commands:
-  ```bash
-  java -Dserver.port=8080 -Dcluster.servers=http://localhost:8081,http://localhost:8082 -jar server.jar
-  java -Dserver.port=8081 -Dcluster.servers=http://localhost:8080,http://localhost:8082 -jar server.jar
-  java -Dserver.port=8082 -Dcluster.servers=http://localhost:8080,http://localhost:8081 -jar server.jar
-  ```
+### Running the Service
+
+1. Start the server:
+   ```bash
+   java -jar prime-service.jar
+   ```
+2. Interact with the API using curl or Postman:
+   ```
+   curl -X GET http://localhost:8080/prime/23
+   ```
